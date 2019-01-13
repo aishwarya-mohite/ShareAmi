@@ -1,0 +1,13 @@
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/utils/AmiConfig.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/utils/Utils.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/model/AmiSharingModel.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/exception/CommandLineParseException.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/utils/CommandLineParser.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/model/SourceProvider.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/exception/InvalidArgumentsException.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/ShareAmiMain.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/model/CmdLineArguments.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/model/TargetProvider.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/utils/AmiSharingUtility.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/utils/KeyValueCommandLineParser.java
+/Users/amohite/eclipse-workspace/test_workspace/shareami/src/main/java/com/testnow/shareami/utils/ShareAmi.java

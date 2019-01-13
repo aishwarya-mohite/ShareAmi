@@ -1,0 +1,25 @@
+// model input.json
+
+{
+ 
+  "sourceProvider": {
+    "access_key": "abc",
+    "secret_key": "pqr",
+    "region": "us-east-1"
+  },
+  "amiIds":["ami1","ami2" ],
+  
+  "targetProviders":[
+    {
+    "access_key": "xyz",
+    "secret_key": "stu",
+    "regions": ["us-west-2","us-east-1"]
+  },
+  {
+    "access_key": "abc",
+    "secret_key": "pqr",
+    "regions": ["ap-south-1","eu-west-1","us-east-2"]
+  }
+    ]
+  
+}
