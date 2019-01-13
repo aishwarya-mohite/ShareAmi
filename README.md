@@ -1,4 +1,4 @@
-# shareSmi-generator
+# shareAmi-generator
 Used to share list of AMI's from one region of one  AWS account to other regions of same account and also to multiple regions of other AWS account
 
 ## How to use this utility ?
