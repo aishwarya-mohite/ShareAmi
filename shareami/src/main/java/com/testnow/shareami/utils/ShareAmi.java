@@ -34,7 +34,7 @@ public class ShareAmi {
 			String sourceAccRegion = amiSharingModel.getSourceProvider().getRegion();
 
 			AmiConfig amiConfig = new AmiConfig();
-			AmazonEC2Client amazonEC2ClientSource = amiConfig.getAwsClient(sourceCredentials);
+			AmazonEC2Client amazonEC2ClientSource = amiConfig.getAwsClientWithRegion(sourceCredentials, sourceAccRegion);
 
 			if (amiSharingModel.getAmiIds().size() > 0) {
 				System.out.println(
