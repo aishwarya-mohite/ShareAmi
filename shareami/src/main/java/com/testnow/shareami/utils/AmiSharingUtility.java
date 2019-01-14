@@ -23,6 +23,9 @@ import com.amazonaws.services.ec2.model.LaunchPermissionModifications;
 import com.amazonaws.services.ec2.model.ModifyImageAttributeRequest;
 import com.amazonaws.services.ec2.model.Tag;
 import com.amazonaws.services.ec2.model.TagDescription;
+import com.amazonaws.services.identitymanagement.AmazonIdentityManagement;
+import com.amazonaws.services.identitymanagement.AmazonIdentityManagementClientBuilder;
+import com.amazonaws.services.identitymanagement.model.ListAccountAliasesResult;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder;
 import com.amazonaws.services.securitytoken.model.GetCallerIdentityRequest;
@@ -88,5 +91,13 @@ public class AmiSharingUtility {
 				.withCredentials(new AWSStaticCredentialsProvider(credential)).build();
 		GetCallerIdentityResult callerIdentity = stsService.getCallerIdentity(new GetCallerIdentityRequest());
 		return callerIdentity.getAccount();
+	}
+
+	public static String getAccountAlies(AWSCredentials credential) {
+		final AmazonIdentityManagement iam = AmazonIdentityManagementClientBuilder.standard()
+				.withCredentials(new AWSStaticCredentialsProvider(credential)).build();
+		ListAccountAliasesResult response = iam.listAccountAliases();
+		String alias = response.getAccountAliases().get(0);
+		return alias;
 	}
 }

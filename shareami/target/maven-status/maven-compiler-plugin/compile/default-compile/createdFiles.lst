@@ -8,6 +8,7 @@ com/testnow/shareami/utils/Utils$1.class
 com/testnow/shareami/utils/AmiSharingUtility.class
 com/testnow/shareami/model/AmiSharingModel.class
 com/testnow/shareami/model/SourceProvider.class
+com/testnow/shareami/model/AmiSharingResult.class
 com/testnow/shareami/exception/CommandLineParseException.class
 com/testnow/shareami/utils/KeyValueCommandLineParser.class
 com/testnow/shareami/utils/AmiConfig.class
