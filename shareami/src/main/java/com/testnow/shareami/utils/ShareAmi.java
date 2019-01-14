@@ -79,15 +79,10 @@ public class ShareAmi {
 												.getAwsClientWithRegion(sourceCredentials, targetRegion);
 										String amiToShare = AmiSharingUtility.copyAmi(amazonEC2ClientSourceWithRegion,
 												ami, sourceAccRegion);
-										try {
-											System.out.println("Copying ami...");
-											TimeUnit.MINUTES.sleep(6);
-										} catch (InterruptedException e) {
-										}
 										System.out.println("AMI " + ami + " copied with new name " + amiToShare
 												+ " in region " + targetRegion + " from source accId " + sourceAccId
 												+ " and source accRegion " + sourceAccRegion);
-
+										System.out.println("Copying ami...");
 										AmiSharingUtility.shareAmi(amazonEC2ClientSourceWithRegion, amiToShare,
 												targetAccId);
 										System.out.println("AMI " + amiToShare + " shared  in region " + targetRegion
@@ -115,11 +110,6 @@ public class ShareAmi {
 										String amiToShare = AmiSharingUtility.copyAmi(amazonEC2ClientTargetWithRegion,
 												ami, sourceAccRegion);
 										Collection<Tag> tags = AmiSharingUtility.copyTags(ami, amazonEC2ClientSource);
-										try {
-											System.out.println("Copying ami...");
-											TimeUnit.MINUTES.sleep(6);
-										} catch (InterruptedException e) {
-										}
 										System.out.println("AMI " + ami + " copied with new name " + amiToShare
 												+ " in region " + targetRegion + " from source accId " + sourceAccId
 												+ " and source accRegion " + sourceAccRegion);

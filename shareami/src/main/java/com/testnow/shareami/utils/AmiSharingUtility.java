@@ -3,6 +3,7 @@ package com.testnow.shareami.utils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -29,23 +30,29 @@ import com.amazonaws.services.securitytoken.model.GetCallerIdentityResult;
 
 public class AmiSharingUtility {
 	public static void shareAmi(AmazonEC2Client amazonEC2Client, String amisToShare, String destAccId) {
-		boolean flag = false;
 		DescribeImagesRequest request = new DescribeImagesRequest().withImageIds(amisToShare);
 		DescribeImagesResult describeImagesResult = amazonEC2Client.describeImages(request);
-
-		List<Image> images = describeImagesResult.getImages();
-		for (Image img : images) {
-			if (img.getImageId().equals(amisToShare)) {
-				flag = true;
+		String amiState = "pending";
+		int maxRetry = 10, retryCount = 0;
+		while (amiState.equalsIgnoreCase(describeImagesResult.getImages().get(0).getState())) {
+			describeImagesResult = amazonEC2Client.describeImages(request);
+			try {
+				TimeUnit.MINUTES.sleep(1);
+			} catch (InterruptedException e) {
+			}
+			System.out.println("Waiting for AMI to be availalbe...");
+			retryCount++;
+			if (retryCount > maxRetry) {
+				System.out.println("Failed to copy and share ani " + amisToShare + " to dest acc " + destAccId);
+				break;
 			}
 		}
-		if (flag == true) {
-			LaunchPermissionModifications withAdd = new LaunchPermissionModifications()
-					.withAdd(new LaunchPermission().withUserId(destAccId));
-			ModifyImageAttributeRequest requestWithLaunchPermission = new ModifyImageAttributeRequest()
-					.withLaunchPermission(withAdd).withImageId(amisToShare);
-			amazonEC2Client.modifyImageAttribute(requestWithLaunchPermission);
-		}
+		LaunchPermissionModifications withAdd = new LaunchPermissionModifications()
+				.withAdd(new LaunchPermission().withUserId(destAccId));
+		ModifyImageAttributeRequest requestWithLaunchPermission = new ModifyImageAttributeRequest()
+				.withLaunchPermission(withAdd).withImageId(amisToShare);
+		amazonEC2Client.modifyImageAttribute(requestWithLaunchPermission);
+
 	}
 
 	public static String copyAmi(AmazonEC2Client amazonEC2Client, String amisToCopy, String sourceAccRegion) {
