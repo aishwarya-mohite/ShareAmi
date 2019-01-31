@@ -35,6 +35,11 @@ public class AmiSharingUtility {
 	public static void shareAmi(AmazonEC2Client amazonEC2Client, String amisToShare, String destAccId) {
 		DescribeImagesRequest request = new DescribeImagesRequest().withImageIds(amisToShare);
 		DescribeImagesResult describeImagesResult = amazonEC2Client.describeImages(request);
+
+		if("available".equalsIgnoreCase(describeImagesResult.getImages().get(0).getState())) {
+			System.out.println("AMI already Available in dest acc = "+destAccId);
+		}
+		else {
 		String amiState = "pending";
 		int maxRetry = 10, retryCount = 0;
 		while (amiState.equalsIgnoreCase(describeImagesResult.getImages().get(0).getState())) {
@@ -55,7 +60,7 @@ public class AmiSharingUtility {
 		ModifyImageAttributeRequest requestWithLaunchPermission = new ModifyImageAttributeRequest()
 				.withLaunchPermission(withAdd).withImageId(amisToShare);
 		amazonEC2Client.modifyImageAttribute(requestWithLaunchPermission);
-
+		}
 	}
 
 	public static String copyAmi(AmazonEC2Client amazonEC2Client, String amisToCopy, String sourceAccRegion) {
@@ -71,6 +76,7 @@ public class AmiSharingUtility {
 		DescribeTagsResult response = amazonEC2Client.describeTags(request);
 		List<TagDescription> tagDiscription = response.getTags();
 		Collection<Tag> tag = new ArrayList<Tag>();
+		if(!tagDiscription.isEmpty()) {
 		for (TagDescription td : tagDiscription) {
 			Tag t = new Tag();
 			t.setKey(td.getKey());
@@ -78,6 +84,8 @@ public class AmiSharingUtility {
 			tag.add(t);
 		}
 		return tag;
+		}
+		else return null;
 
 	}
 
