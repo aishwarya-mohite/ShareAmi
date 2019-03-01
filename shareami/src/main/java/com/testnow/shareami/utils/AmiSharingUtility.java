@@ -41,7 +41,7 @@ public class AmiSharingUtility {
 		}
 		else {
 		String amiState = "pending";
-		int maxRetry = 10, retryCount = 0;
+		int maxRetry = 30, retryCount = 0;
 		while (amiState.equalsIgnoreCase(describeImagesResult.getImages().get(0).getState())) {
 			describeImagesResult = amazonEC2Client.describeImages(request);
 			try {
